@@ -9,8 +9,8 @@
 ### feature
    - golang
    - 现版本基于阿里云协议2017-05-25版
-   - [ ] 客户端调用支持命令行与toml参数配置
-   - [ ] 短信发送
+   - [x] 客户端调用支持命令行与toml参数配置
+   - [x] 短信发送
    - [ ] 验证码接口   
    - [ ] 群发接口
    - [ ] 发送反馈查询接口
@@ -36,5 +36,52 @@
     go get github.com/yunhor/alisms
 
 ### 示例
+#### 命令行/toml配置，单条发送
 
+```
+package main
+
+import (
+	"fmt"
+	"log"
+	"os"
+
+	"github.com/BurntSushi/toml"
+	"github.com/urfave/cli"
+	"github.com/yunhor/alisms"
+)
+
+func main() {
+
+	app := cli.NewApp()
+
+	app.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:  "config, c",
+			Value: "sms.toml",
+			Usage: "从配置文件中读取配置信息 `FILE`",
+		},
+	}
+	app.Action = func(c *cli.Context) error {
+		var cfg alisms.UserParams
+		if _, err := toml.DecodeFile(c.String("config"), &cfg); err != nil {
+			log.Fatal(err)
+		}
+		cfg.TemplateParam = fmt.Sprintf("{\"name\":\"%s\",\"money\":\"%s\",\"time\":\"%s\"}", "中文名字", "8000", "1月20至2月22日")
+		//模板其它参数修改
+		rt, str, err := alisms.SendMessage(&cfg)
+		fmt.Println(rt)
+		fmt.Println(str)
+		if err != nil {
+			log.Fatal(err)
+		}
+		return nil
+	}
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+}
+```
 #### 更多例子详见_examples目录
