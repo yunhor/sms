@@ -91,7 +91,13 @@ func main() {
 
 - 2018-03-15 旧的大于的accesskey和secret并不相同，迁移至阿里云后需要重新生成一对。
 
-### 阿里大于2.0参数写入相应的toml
+### 阿里大于2.0
+
+#### 安装
+
+	go get github.com/yunhor/alisms/dayu
+	
+#### 下列参数写入相应的toml
 
 	HTTPSURL = "https://eco.taobao.com/router/rest"
 	HTTPURL = "http://gw.api.taobao.com/router/rest"
