@@ -26,8 +26,6 @@ func main() {
 		if _, err := toml.DecodeFile(c.String("config"), &cfg); err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(cfg.AccessKeyId)
-		fmt.Println(cfg.AppSecret)
 		cfg.TemplateParam = fmt.Sprintf("{\"name\":\"%s\",\"money\":\"%s\",\"time\":\"%s\"}", "中文名字", "8000", "1月20至2月22日")
 		//模板其它参数修改
 		rt, str, err := alisms.SendMessage(&cfg)

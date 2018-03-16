@@ -23,8 +23,8 @@ func SendMessage(userInput *UserParams) (bool, string, error) {
 	params.Set("SignatureNonce", GetRandomString(12))                        // 用于请求的防重放攻击，每次请求唯一
 	params.Set("Format", "JSON")
 	params.Set("Action", "SendSms")                    // API的命名，固定值，如发送短信API的值为：SendSms
-	params.Set("Version", "2017-05-25")                // API的版本，固定值，如短信API的值为：2017-05-25
-	params.Set("RegionId", "cn-xiamen")                // API支持的RegionID，如短信API的值为：cn-xiamen
+	params.Set("Version", userInput.SmsVersion)        // API的版本，固定值，如短信API的值为：2017-05-25
+	params.Set("RegionId", userInput.RegionId)         // API支持的RegionID，如短信API的值为：cn-xiamen
 	params.Set("PhoneNumbers", userInput.PhoneNumbers) // 短信接收号码,支持以逗号分隔的形式进行批量调用，批量上限为1000个手机号码,批量调用相对于单条调用及时性稍有延迟,验证码类型的短信推荐使用单条调用的方式
 	params.Set("SignName", userInput.SignName)         // 短信签名
 	params.Set("TemplateParam", userInput.TemplateParam)
