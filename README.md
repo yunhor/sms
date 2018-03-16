@@ -8,7 +8,8 @@
 
 ### feature
    - golang
-   - 现版本基于阿里云协议2017-05-25版
+   - [x] 阿里大于 2.0版 备份
+   - [x] 现版本基于阿里云协议2017-05-25版
    - [x] 客户端调用支持命令行与toml参数配置
    - [x] 短信发送
    - [ ] 验证码接口   
@@ -89,3 +90,14 @@ func main() {
 ### 杂记
 
 - 2018-03-15 旧的大于的accesskey和secret并不相同，迁移至阿里云后需要重新生成一对。
+
+### 阿里大于2.0参数写入相应的toml
+
+	HTTPSURL = "https://eco.taobao.com/router/rest"
+	HTTPURL = "http://gw.api.taobao.com/router/rest"
+	sendSms = "alibaba.aliqin.fc.sms.num.send"
+	callTTS = "alibaba.aliqin.fc.tts.num.singlecall"
+	callVoice = "alibaba.aliqin.fc.voice.num.singlecall"
+	callDouble = "alibaba.aliqin.fc.voice.num.doublecall"
+	msgConsume = "taobao.tmc.messages.consume"
+	msgConfirm = "taobao.tmc.messages.confirm"
